@@ -1,0 +1,131 @@
+*{box-sizing:border-box;}
+
+
+@font-face {
+    font-family: "Chunk Five";
+    src: url(../fonts/chunkfive/ChunkFive-Regular.otf);
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+body{
+    font-family:arial, sans-serif;
+    background: #FCEABB;
+    background: linear-gradient(to bottom, #FCEABB 0%, #FCCD4D 50%, #F8B500 100%);
+}
+
+header{
+    text-align:center;
+}
+
+#mainNav {
+    background-color: #333;
+
+}
+
+#mainNav a {
+    color: white;
+    text-decoration: none;
+}
+
+#mainNav li {
+    display: inline-block;
+    padding: 1em;
+}
+
+#mainNav li:hover {
+    background-color: orange;
+}
+
+#mainNav .dropdown-content {
+    display: none;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+#mainNav li.dropdown {
+    position: relative;
+}
+
+#mainNav li.dropdown .dropdown-content {
+    min-width: 160px;
+    background-color: #fff;
+}
+
+#mainNav li.dropdown:hover .dropdown-content {
+    display: block;
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    min-width: 100%;
+    overflow: auto;
+    background-color: #fff;
+}
+
+#mainNav .dropdown-content a {
+    display: block;
+    padding: 1em;
+    color: #000;
+}
+
+#mainNav .dropdown-content a:hover {
+    color: #ccc;
+}
+
+h1, h2, h3 {
+    font-family: "Chunk Five", serif;
+}
+
+#content {
+    background-color: rgba(255, 255, 255, .30);
+    width: 80%;
+    padding: 20px;
+    margin: 50px auto;
+}
+
+#subNav {
+    float: left;
+    width: 25%;
+    padding-right: 20px;
+}
+
+#subNav ul {
+    list-style: none;
+    padding: 0;
+}
+
+#subNav li {
+    background-color: #FCCD4D;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+#subNav li:hover {
+    background-color: #FCEABB;
+}
+
+#main {
+    float: left;
+    width: 75%;
+    height: 400px;
+    overflow: auto;
+    padding-right: 50px;
+}
+
+#subNav a {
+    font-family: 'Luckiest Guy', cursive;
+    color: #fff;
+    text-decoration: none;
+}
+
+footer{
+    background-color: #333;
+    color:white;
+    text-align:center;
+    padding:10px 0;
+    clear: both;
+}
+
