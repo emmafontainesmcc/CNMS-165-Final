@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Horses of the West - Morgan Horse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <nav>
+        <div class="nav-left">
+          <img src="assets/images/horse.webp" alt="Horse silhouette logo">
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li>
+            <a href="aqh.html">Horses of the West</a>
+            <ul>
+              <li><a href="aqh.html">American Quarter Horse</a></li>
+              <li><a href="morgan.html">Morgan</a></li>
+              <li><a href="mustang.html">Mustang</a></li>
+            </ul>
+          </li>
+          <li><a href="information.html">More Information</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <article class="content-box horse-layout">
+        <section>
+          <header>
+            <h2>Morgan Horse</h2>
+          </header>
+          <p>
+            The Morgan horse was the all-around horse of America in the past and proved essential for the existence and
+            development of early settlers. As compared to other breeds that evolved for particular uses much later,
+            Morgans were important, as they could do anything that was required of them either on a farm or around town.
+            Their principal uses include transport, agriculture, and riding.
+          </p>
+          <p>Morgans were tasked to:</p>
+          <ul>
+            <li>Draw wagons and stagecoaches.</li>
+            <li>Work on the farm.</li>
+            <li>Travel.</li>
+          </ul>
+          <p>
+            It is worth noting that Morgans were powerful for their small size; this means that they could undertake
+            heavy tasks without necessarily being big draft horses. Morgans were also docile and intelligent; hence,
+            they were easily trained. They had energy to work tirelessly throughout the day.
+          </p>
+          <p>
+            Currently, the Morgan breed no longer serves its traditional purpose of undertaking difficult tasks due to
+            the mechanization of agriculture. However, it still plays a crucial role in current equestrian activities.
+          </p>
+          <p>Morgans have been mainly utilized for:</p>
+          <ul>
+            <li>Driving.</li>
+            <li>Dressage and show riding.</li>
+            <li>Trail riding.</li>
+          </ul>
+        </section>
+
+        <aside class="slideshow" data-images="assets/images/morgans.jpg,assets/images/morgans2.jpg,assets/images/morgans3.jpg">
+          <button class="prev" aria-label="Previous image">&#10094;</button>
+          <figure>
+            <img src="assets/images/morgans.jpg" alt="Morgan horse">
+          </figure>
+          <button class="next" aria-label="Next image">&#10095;</button>
+        </aside>
+      </article>
+
+      <div class="lightbox" aria-hidden="true">
+        <button class="close" aria-label="Close slideshow">&times;</button>
+        <button class="prev" aria-label="Previous image">&#10094;</button>
+        <img src="" alt="">
+        <button class="next" aria-label="Next image">&#10095;</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const slideshow = document.querySelector(".slideshow");
+      const figureImg = slideshow.querySelector("img");
+      const prevBtn = slideshow.querySelector(".prev");
+      const nextBtn = slideshow.querySelector(".next");
+      const images = slideshow.dataset.images.split(",");
+      let currentIndex = 0;
+
+      const lightbox = document.querySelector(".lightbox");
+      const lightboxImg = lightbox.querySelector("img");
+      const lbPrev = lightbox.querySelector(".prev");
+      const lbNext = lightbox.querySelector(".next");
+      const lbClose = lightbox.querySelector(".close");
+
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+        figureImg.src = images[currentIndex];
+        lightboxImg.src = images[currentIndex];
+      }
+
+      prevBtn.addEventListener("click", function () {
+        showImage(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener("click", function () {
+        showImage(currentIndex + 1);
+      });
+
+      figureImg.addEventListener("click", function () {
+        lightbox.classList.add("active");
+        lightbox.setAttribute("aria-hidden", "false");
+        lightboxImg.src = images[currentIndex];
+      });
+
+      lbPrev.addEventListener("click", function () {
+        showImage(currentIndex - 1);
+      });
+
+      lbNext.addEventListener("click", function () {
+        showImage(currentIndex + 1);
+      });
+
+      lbClose.addEventListener("click", function () {
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+      });
+
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+          lightbox.classList.remove("active");
+          lightbox.setAttribute("aria-hidden", "true");
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (!lightbox.classList.contains("active")) return;
+        if (event.key === "Escape") {
+          lightbox.classList.remove("active");
+          lightbox.setAttribute("aria-hidden", "true");
+        } else if (event.key === "ArrowRight") {
+          showImage(currentIndex + 1);
+        } else if (event.key === "ArrowLeft") {
+          showImage(currentIndex - 1);
+        }
+      });
+
+      showImage(0);
+    })();
+  </script>
+</body>
+</html>

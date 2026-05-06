@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Horses of the West - Mustang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <nav>
+        <div class="nav-left">
+          <img src="assets/images/horse.webp" alt="Horse silhouette logo">
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li>
+            <a href="aqh.html">Horses of the West</a>
+            <ul>
+              <li><a href="aqh.html">American Quarter Horse</a></li>
+              <li><a href="morgan.html">Morgan</a></li>
+              <li><a href="mustang.html">Mustang</a></li>
+            </ul>
+          </li>
+          <li><a href="information.html">More Information</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <article class="content-box horse-layout">
+        <section>
+          <header>
+            <h2>Mustang</h2>
+          </header>
+          <p>
+            A Mustang is a wild breed of horses found in the American West; it originated from the Spanish horses
+            introduced to North America in the 1500s. The breed does not result from selective breeding for a particular
+            purpose by humans like most domesticated breeds, hence not being “bred for jobs.” Instead, the breeders
+            captured and trained them to be used depending on how humans would need them after domestication. This breed
+            was very important to people due to their resilience in the Western period.
+          </p>
+          <p>Roles of Mustangs in the Western period:</p>
+          <ul>
+            <li>Ridden by native American tribes for transportation and hunting as well as war.</li>
+            <li>Ridden by settlers for transportation.</li>
+          </ul>
+          <p>
+            The biggest value of the breed was its resilience. They adapted to withstand rough terrains, long droughts,
+            adverse climatic conditions, and even lack of water and food sources, making them among the toughest horses.
+            Today, Mustangs have taken a completely opposite direction compared to other western breeds. While other
+            horse breeds are domesticated and used for various purposes, the mustangs are kept on designated lands as
+            wild animals.
+          </p>
+          <p>Modern uses of the Mustang horses include:</p>
+          <ul>
+            <li>Adoption training of captured or relocated Mustangs.</li>
+            <li>Trail riding.</li>
+          </ul>
+        </section>
+
+        <aside class="slideshow" data-images="assets/images/mustangs.webp,assets/images/mustangs2.jpg,assets/images/mustangs3.jpg">
+          <button class="prev" aria-label="Previous image">&#10094;</button>
+          <figure>
+            <img src="assets/images/mustangs.webp" alt="Mustang horse">
+          </figure>
+          <button class="next" aria-label="Next image">&#10095;</button>
+        </aside>
+      </article>
+
+      <div class="lightbox" aria-hidden="true">
+        <button class="close" aria-label="Close slideshow">&times;</button>
+        <button class="prev" aria-label="Previous image">&#10094;</button>
+        <img src="" alt="">
+        <button class="next" aria-label="Next image">&#10095;</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const slideshow = document.querySelector(".slideshow");
+      const figureImg = slideshow.querySelector("img");
+      const prevBtn = slideshow.querySelector(".prev");
+      const nextBtn = slideshow.querySelector(".next");
+      const images = slideshow.dataset.images.split(",");
+      let currentIndex = 0;
+
+      const lightbox = document.querySelector(".lightbox");
+      const lightboxImg = lightbox.querySelector("img");
+      const lbPrev = lightbox.querySelector(".prev");
+      const lbNext = lightbox.querySelector(".next");
+      const lbClose = lightbox.querySelector(".close");
+
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+        figureImg.src = images[currentIndex];
+        lightboxImg.src = images[currentIndex];
+      }
+
+      prevBtn.addEventListener("click", function () {
+        showImage(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener("click", function () {
+        showImage(currentIndex + 1);
+      });
+
+      figureImg.addEventListener("click", function () {
+        lightbox.classList.add("active");
+        lightbox.setAttribute("aria-hidden", "false");
+        lightboxImg.src = images[currentIndex];
+      });
+
+      lbPrev.addEventListener("click", function () {
+        showImage(currentIndex - 1);
+      });
+
+      lbNext.addEventListener("click", function () {
+        showImage(currentIndex + 1);
+      });
+
+      lbClose.addEventListener("click", function () {
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+      });
+
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+          lightbox.classList.remove("active");
+          lightbox.setAttribute("aria-hidden", "true");
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (!lightbox.classList.contains("active")) return;
+        if (event.key === "Escape") {
+          lightbox.classList.remove("active");
+          lightbox.setAttribute("aria-hidden", "true");
+        } else if (event.key === "ArrowRight") {
+          showImage(currentIndex + 1);
+        } else if (event.key === "ArrowLeft") {
+          showImage(currentIndex - 1);
+        }
+      });
+
+      showImage(0);
+    })();
+  </script>
+</body>
+</html>

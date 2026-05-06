@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Horses of the West - American Quarter Horse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <nav>
+        <div class="nav-left">
+          <img src="assets/images/horse.webp" alt="Horse silhouette logo">
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li>
+            <a href="aqh.html">Horses of the West</a>
+            <ul>
+              <li><a href="aqh.html">American Quarter Horse</a></li>
+              <li><a href="morgan.html">Morgan</a></li>
+              <li><a href="mustang.html">Mustang</a></li>
+            </ul>
+          </li>
+          <li><a href="information.html">More Information</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <article class="content-box horse-layout">
+        <section>
+          <header>
+            <h2>American Quarter Horse</h2>
+          </header>
+          <p>
+            The American Quarter Horse was popular as a horse for the cowboys because of its quick, short sprint
+            capability, docile nature, and fast reactions. It was an ideal choice for herding cattle on ranches. The AQH
+            was crucial for cowboys because of its capability to run short sprints quickly while chasing or isolating
+            cattle that have been separated from their herd on ranches.
+          </p>
+          <p>AQH were utilized for:</p>
+          <ul>
+            <li>Roping cattle</li>
+            <li>Herding and cutting</li>
+            <li>General ranch duties</li>
+          </ul>
+          <p>
+            The Quarter Horse today is very similar to its origins in terms of purpose and usage and is among the most
+            popular working horses in the world. Although technology may have reduced the workload on ranches, the breed
+            is still highly associated with cattle management. It is used frequently for general ranch duty and is also
+            a common participant in cattle ranching in rodeos.
+          </p>
+        </section>
+
+        <aside class="slideshow" data-images="assets/images/aqh.jpg,assets/images/aqh2.jpg,assets/images/aqh3.jpg">
+          <button class="prev" aria-label="Previous image">&#10094;</button>
+          <figure>
+            <img src="assets/images/aqh.jpg" alt="American Quarter Horse">
+          </figure>
+          <button class="next" aria-label="Next image">&#10095;</button>
+        </aside>
+      </article>
+
+      <div class="lightbox" aria-hidden="true">
+        <button class="close" aria-label="Close slideshow">&times;</button>
+        <button class="prev" aria-label="Previous image">&#10094;</button>
+        <img src="" alt="">
+        <button class="next" aria-label="Next image">&#10095;</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const slideshow = document.querySelector(".slideshow");
+      const figureImg = slideshow.querySelector("img");
+      const prevBtn = slideshow.querySelector(".prev");
+      const nextBtn = slideshow.querySelector(".next");
+      const images = slideshow.dataset.images.split(",");
+      let currentIndex = 0;
+
+      const lightbox = document.querySelector(".lightbox");
+      const lightboxImg = lightbox.querySelector("img");
+      const lbPrev = lightbox.querySelector(".prev");
+      const lbNext = lightbox.querySelector(".next");
+      const lbClose = lightbox.querySelector(".close");
+
+      function showImage(index) {
+        currentIndex = (index + images.length) % images.length;
+        figureImg.src = images[currentIndex];
+        lightboxImg.src = images[currentIndex];
+      }
+
+      prevBtn.addEventListener("click", function () {
+        showImage(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener("click", function () {
+        showImage(currentIndex + 1);
+      });
+
+      figureImg.addEventListener("click", function () {
+        lightbox.classList.add("active");
+        lightbox.setAttribute("aria-hidden", "false");
+        lightboxImg.src = images[currentIndex];
+      });
+
+      lbPrev.addEventListener("click", function () {
+        showImage(currentIndex - 1);
+      });
+
+      lbNext.addEventListener("click", function () {
+        showImage(currentIndex + 1);
+      });
+
+      lbClose.addEventListener("click", function () {
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+      });
+
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+          lightbox.classList.remove("active");
+          lightbox.setAttribute("aria-hidden", "true");
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (!lightbox.classList.contains("active")) return;
+        if (event.key === "Escape") {
+          lightbox.classList.remove("active");
+          lightbox.setAttribute("aria-hidden", "true");
+        } else if (event.key === "ArrowRight") {
+          showImage(currentIndex + 1);
+        } else if (event.key === "ArrowLeft") {
+          showImage(currentIndex - 1);
+        }
+      });
+
+      showImage(0);
+    })();
+  </script>
+</body>
+</html>
